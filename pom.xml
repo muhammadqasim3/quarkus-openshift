@@ -7,7 +7,7 @@
 
     <properties>
         <compiler-plugin.version>3.14.0</compiler-plugin.version>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
@@ -83,8 +83,32 @@
                 <version>${compiler-plugin.version}</version>
                 <configuration>
                     <parameters>true</parameters>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <from>
+                        <image>eclipse-temurin:17-jre</image>
+                    </from>
+                    <to>
+                        <image>quay.io/m_qasimaslam/quarkus-openshift</image>
+                        <auth>
+                            <username>m_qasimaslam+jib_builder</username>
+                            <password>HE1QOM2J8TKVZM84N8JAOMI7MWCYQVL9LQ18LA2B57SPSOQA0J61S2DO1DA6JIX9</password>
+                        </auth>
+                    </to>
+                    <container>
+                        <mainClass>io.quarkus.runner.GeneratedMain</mainClass>
+                    </container>
+                </configuration>
+            </plugin>
+
+
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire-plugin.version}</version>
@@ -114,6 +138,7 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
